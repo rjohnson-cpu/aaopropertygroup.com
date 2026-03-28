@@ -21,10 +21,12 @@ body{font-family:var(--fb);color:var(--black);background:var(--white);font-size:
 nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav);background:rgba(255,255,255,0.97);border-bottom:1px solid var(--border);backdrop-filter:blur(8px);display:flex;align-items:center}
 .nav-inner{max-width:var(--mw);margin:0 auto;padding:0 40px;width:100%;display:flex;align-items:center;justify-content:space-between}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.logo-mark{width:36px;height:36px;background:var(--purple);display:flex;align-items:center;justify-content:center;border-radius:4px}
-.logo-mark span{color:#fff;font-family:var(--fd);font-weight:600;font-size:14px;letter-spacing:1px}
+.logo-mark{display:flex;align-items:center}
+.logo-mark img{height:40px;width:auto}
 .logo-text strong{font-size:14px;font-weight:500;color:var(--black);display:block;line-height:1.2}
 .logo-text em{font-size:10px;color:var(--gray);letter-spacing:1.5px;text-transform:uppercase;font-style:normal}
+.ft-mark{display:flex;align-items:center}
+.ft-mark img{height:32px;width:auto}
 .nav-links{display:flex;gap:40px;list-style:none}
 .nav-links a{text-decoration:none;font-size:13px;color:var(--gray);transition:color .2s;font-weight:400;letter-spacing:.3px}
 .nav-links a:hover{color:var(--purple)}
@@ -198,8 +200,6 @@ hr.div{border:none;border-top:1px solid var(--border)}
 footer{background:var(--black);color:#fff;padding:60px 0 40px}
 .ft-inner{max-width:var(--mw);margin:0 auto;padding:0 40px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:60px}
 .ft-brand-logo{display:flex;align-items:center;gap:10px;margin-bottom:20px}
-.ft-mark{width:32px;height:32px;background:var(--purple);border-radius:3px;display:flex;align-items:center;justify-content:center}
-.ft-mark span{color:#fff;font-family:var(--fd);font-size:13px;font-weight:600}
 .ft-brand-logo strong{font-size:14px;font-weight:400}
 .ft-tag{font-size:13px;color:rgba(255,255,255,.4);font-weight:300;line-height:1.7;max-width:280px}
 .ft-col h4{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:400;margin-bottom:20px}
@@ -225,7 +225,7 @@ footer{background:var(--black);color:#fff;padding:60px 0 40px}
 <nav>
   <div class="nav-inner">
     <a href="#home" class="logo">
-      <div class="logo-mark"><span>AAO</span></div>
+      <div class="logo-mark"><img src="AAO_PROPERTY_GOURP_LOGO.jpg" alt="AAO Property Group"></div>
       <div class="logo-text"><strong>AAO Property Group</strong><em>Strategic Real Estate Advisory</em></div>
     </a>
     <ul class="nav-links">
@@ -337,7 +337,7 @@ footer{background:var(--black);color:#fff;padding:60px 0 40px}
     <div class="ft-inner">
       <div>
         <div class="ft-brand-logo">
-          <div class="ft-mark"><span>AAO</span></div>
+          <div class="ft-mark"><img src="AAO_PROPERTY_GOURP_LOGO.jpg" alt="AAO Property Group"></div>
           <strong>AAO Property Group</strong>
         </div>
         <p class="ft-tag">Boutique strategic real estate advisory — solving complex, distressed, and execution-challenged situations across every asset class.</p>
@@ -458,7 +458,7 @@ footer{background:var(--black);color:#fff;padding:60px 0 40px}
   <footer>
     <div class="ft-inner">
       <div>
-        <div class="ft-brand-logo"><div class="ft-mark"><span>AAO</span></div><strong>AAO Property Group</strong></div>
+        <div class="ft-brand-logo"><div class="ft-mark"><img src="AAO_PROPERTY_GOURP_LOGO.jpg" alt="AAO Property Group"></div><strong>AAO Property Group</strong></div>
         <p class="ft-tag">Boutique strategic real estate advisory — solving complex, distressed, and execution-challenged situations across every asset class.</p>
       </div>
       <div class="ft-col"><h4>Navigation</h4><ul><li><a href="#home">Home</a></li><li><a href="#about">About Us</a></li><li><a href="#focus">Our Focus</a></li><li><a href="#contact">Contact</a></li></ul></div>
@@ -532,13 +532,13 @@ footer{background:var(--black);color:#fff;padding:60px 0 40px}
   <section class="section">
     <div class="container">
       <span class="label">Deep Verticals</span>
-      <h2 class="hdl hdl-lg">Housing &amp; Retail.</h2>
+      <h2 class="hdl hdl-lg">Housing &amp; Retail</h2>
       <p class="body-t" style="max-width:600px;margin-top:12px">Within our asset-agnostic advisory practice, two verticals represent the deepest concentration of hands-on transaction and operational experience.</p>
       <div class="exp-grid">
         <div class="exp-card">
           <div class="exp-head h1">
             <div class="exp-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
-            <h3>Regulated &amp; Affordable Housing</h3>
+            <h3>Housing</h3>
           </div>
           <div class="exp-body">
             <ul class="exp-pts">
@@ -553,7 +553,7 @@ footer{background:var(--black);color:#fff;padding:60px 0 40px}
         <div class="exp-card">
           <div class="exp-head h2">
             <div class="exp-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
-            <h3>Distressed &amp; Institutional Retail</h3>
+            <h3>Retail</h3>
           </div>
           <div class="exp-body">
             <ul class="exp-pts">
@@ -572,7 +572,7 @@ footer{background:var(--black);color:#fff;padding:60px 0 40px}
 
   <footer>
     <div class="ft-inner">
-      <div><div class="ft-brand-logo"><div class="ft-mark"><span>AAO</span></div><strong>AAO Property Group</strong></div><p class="ft-tag">Boutique strategic real estate advisory — solving complex, distressed, and execution-challenged situations across every asset class.</p></div>
+      <div><div class="ft-brand-logo"><div class="ft-mark"><img src="AAO_PROPERTY_GOURP_LOGO.jpg" alt="AAO Property Group"></div><strong>AAO Property Group</strong></div><p class="ft-tag">Boutique strategic real estate advisory — solving complex, distressed, and execution-challenged situations across every asset class.</p></div>
       <div class="ft-col"><h4>Navigation</h4><ul><li><a href="#home">Home</a></li><li><a href="#about">About Us</a></li><li><a href="#focus">Our Focus</a></li><li><a href="#contact">Contact</a></li></ul></div>
       <div class="ft-col"><h4>Services</h4><ul><li>Distressed &amp; Special Situations</li><li>Capital Structuring</li><li>Transaction Advisory</li><li>Strategic Asset Management</li><li>Municipal Advisory</li><li>Development &amp; Reuse</li></ul></div>
     </div>
@@ -656,7 +656,7 @@ footer{background:var(--black);color:#fff;padding:60px 0 40px}
 
   <footer>
     <div class="ft-inner">
-      <div><div class="ft-brand-logo"><div class="ft-mark"><span>AAO</span></div><strong>AAO Property Group</strong></div><p class="ft-tag">Boutique strategic real estate advisory — solving complex, distressed, and execution-challenged situations across every asset class.</p></div>
+      <div><div class="ft-brand-logo"><div class="ft-mark"><img src="AAO_PROPERTY_GOURP_LOGO.jpg" alt="AAO Property Group"></div><strong>AAO Property Group</strong></div><p class="ft-tag">Boutique strategic real estate advisory — solving complex, distressed, and execution-challenged situations across every asset class.</p></div>
       <div class="ft-col"><h4>Navigation</h4><ul><li><a href="#home">Home</a></li><li><a href="#about">About Us</a></li><li><a href="#focus">Our Focus</a></li><li><a href="#contact">Contact</a></li></ul></div>
       <div class="ft-col"><h4>Services</h4><ul><li>Distressed &amp; Special Situations</li><li>Capital Structuring</li><li>Transaction Advisory</li><li>Strategic Asset Management</li><li>Municipal Advisory</li><li>Development &amp; Reuse</li></ul></div>
     </div>
