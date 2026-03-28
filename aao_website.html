@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AAO Property Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --purple: #5B2D8E;
+    --purple-dark: #3D1A6E;
+    --purple-light: #8B5BBE;
+    --purple-faint: #F4F0FA;
+    --gold: #C9A227;
+    --gold-light: #E8C94A;
+    --black: #0E0E0E;
+    --gray-dark: #2C2C2C;
+    --gray: #6B6B6B;
+    --gray-light: #A8A8A8;
+    --border: #E5E5E5;
+    --white: #FFFFFF;
+    --off-white: #FAFAFA;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+    --nav-h: 72px;
+    --max-w: 1200px;
+    --section-pad: 100px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--black);
+    background: var(--white);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ─────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: var(--nav-h);
+    background: rgba(255,255,255,0.97);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center;
+  }
+  .nav-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 40px;
+    width: 100%;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none; cursor: pointer;
+  }
+  .nav-logo-mark {
+    width: 36px; height: 36px;
+    background: var(--purple);
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 4px;
+  }
+  .nav-logo-mark span {
+    color: white; font-family: var(--font-display); font-weight: 600; font-size: 15px; letter-spacing: 1px;
+  }
+  .nav-logo-text {
+    display: flex; flex-direction: column; line-height: 1.2;
+  }
+  .nav-logo-text strong {
+    font-family: var(--font-body); font-weight: 500; font-size: 14px; color: var(--black); letter-spacing: 0.5px;
+  }
+  .nav-logo-text span {
+    font-size: 10px; color: var(--gray); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 300;
+  }
+  .nav-links {
+    display: flex; gap: 40px; list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none; font-size: 13px; font-weight: 400; letter-spacing: 0.5px;
+    color: var(--gray); transition: color 0.2s;
+    cursor: pointer;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--purple); }
+  .nav-links a.active { font-weight: 500; }
+  .nav-cta {
+    background: var(--purple); color: white !important;
+    padding: 10px 22px; border-radius: 3px; font-size: 13px !important;
+    font-weight: 500 !important; letter-spacing: 0.3px;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--purple-dark) !important; color: white !important; }
+
+  /* ── PAGE SYSTEM ─────────────────────────── */
+  .page { display: none; padding-top: var(--nav-h); }
+  .page.active { display: block; }
+
+  /* ── SHARED ──────────────────────────────── */
+  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+  .section { padding: var(--section-pad) 0; }
+  .section-sm { padding: 60px 0; }
+
+  .label {
+    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--gold); font-weight: 500; margin-bottom: 16px; display: block;
+  }
+  .headline {
+    font-family: var(--font-display); font-weight: 300; line-height: 1.2;
+    color: var(--black);
+  }
+  .headline-xl { font-size: clamp(42px, 6vw, 72px); }
+  .headline-lg { font-size: clamp(34px, 4vw, 52px); }
+  .headline-md { font-size: clamp(26px, 3vw, 38px); }
+  .body-text { font-size: 16px; color: var(--gray); line-height: 1.8; font-weight: 300; }
+  .body-text-sm { font-size: 14px; color: var(--gray); line-height: 1.8; font-weight: 300; }
+
+  .gold-rule { width: 48px; height: 2px; background: var(--gold); margin: 28px 0; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* ── HERO ────────────────────────────────── */
+  .hero {
+    min-height: calc(90vh - var(--nav-h));
+    display: flex; align-items: center;
+    padding: 80px 0;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 42%; height: 100%;
+    background: var(--purple-faint);
+    clip-path: polygon(8% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+  .hero-inner {
+    max-width: var(--max-w); margin: 0 auto; padding: 0 40px;
+    width: 100%; position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .hero-tagline {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); font-weight: 500; margin-bottom: 24px; display: block;
+  }
+  .hero-headline {
+    font-family: var(--font-display); font-size: clamp(46px, 6vw, 78px);
+    font-weight: 300; line-height: 1.1; color: var(--black); margin-bottom: 32px;
+  }
+  .hero-headline em { font-style: italic; color: var(--purple); }
+  .hero-body { font-size: 17px; color: var(--gray); line-height: 1.8; font-weight: 300; margin-bottom: 48px; }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--purple); color: white; padding: 14px 32px;
+    border-radius: 3px; font-size: 14px; font-weight: 500; letter-spacing: 0.3px;
+    text-decoration: none; cursor: pointer; border: none;
+    transition: background 0.2s; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--purple-dark); }
+  .btn-outline {
+    background: transparent; color: var(--purple);
+    border: 1.5px solid var(--purple); padding: 13px 32px;
+    border-radius: 3px; font-size: 14px; font-weight: 500; letter-spacing: 0.3px;
+    text-decoration: none; cursor: pointer;
+    transition: all 0.2s; display: inline-block;
+  }
+  .btn-outline:hover { background: var(--purple); color: white; }
+  .hero-right { display: flex; flex-direction: column; gap: 20px; }
+  .hero-stat-card {
+    background: white; border: 1px solid var(--border); border-radius: 6px;
+    padding: 28px 32px;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+  }
+  .hero-stat-card.accent { border-left: 3px solid var(--gold); }
+  .hero-stat-card.accent-purple { border-left: 3px solid var(--purple); }
+  .stat-num {
+    font-family: var(--font-display); font-size: 42px; font-weight: 300;
+    color: var(--purple); line-height: 1; margin-bottom: 6px;
+  }
+  .stat-label { font-size: 13px; color: var(--gray); font-weight: 300; }
+
+  /* ── HOME: WHAT WE DO ────────────────────── */
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    background: var(--border); border: 1px solid var(--border);
+    border-radius: 6px; overflow: hidden;
+  }
+  .service-cell {
+    background: white; padding: 40px 36px;
+    transition: background 0.2s;
+  }
+  .service-cell:hover { background: var(--purple-faint); }
+  .service-icon {
+    width: 40px; height: 40px; margin-bottom: 24px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .service-icon svg { width: 24px; height: 24px; stroke: var(--purple); fill: none; stroke-width: 1.5; }
+  .service-title {
+    font-family: var(--font-display); font-size: 20px; font-weight: 400;
+    color: var(--black); margin-bottom: 12px;
+  }
+
+  /* ── TICKER ──────────────────────────────── */
+  .ticker-wrap {
+    background: var(--purple); padding: 18px 0; overflow: hidden;
+    border-top: 1px solid var(--purple-dark);
+    border-bottom: 1px solid var(--purple-dark);
+  }
+  .ticker-track {
+    display: flex; gap: 0; white-space: nowrap;
+    animation: ticker 28s linear infinite;
+  }
+  .ticker-track:hover { animation-play-state: paused; }
+  .ticker-item {
+    display: inline-flex; align-items: center; gap: 24px;
+    padding: 0 40px; font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.7); font-weight: 400;
+  }
+  .ticker-dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+  @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  /* ── PAGE HEADER ─────────────────────────── */
+  .page-hero {
+    background: var(--purple-dark); padding: 80px 0 70px;
+    color: white; position: relative; overflow: hidden;
+  }
+  .page-hero::after {
+    content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 1px;
+    background: var(--gold);
+  }
+  .page-hero-label {
+    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--gold); font-weight: 500; margin-bottom: 16px; display: block;
+  }
+  .page-hero-headline {
+    font-family: var(--font-display); font-size: clamp(36px, 5vw, 60px);
+    font-weight: 300; color: white; line-height: 1.15; margin-bottom: 20px;
+  }
+  .page-hero-sub { font-size: 16px; color: rgba(255,255,255,0.65); font-weight: 300; max-width: 640px; }
+
+  /* ── ABOUT ───────────────────────────────── */
+  .about-intro-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+  }
+  .about-intro-left .headline-lg { margin-bottom: 24px; }
+  .about-intro-left .body-text { margin-bottom: 24px; }
+  .about-pillars { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .pillar-row { padding: 24px 28px; border-bottom: 1px solid var(--border); }
+  .pillar-row:last-child { border-bottom: none; }
+  .pillar-row strong { display: block; font-size: 14px; color: var(--black); font-weight: 500; margin-bottom: 6px; }
+  .pillar-row p { font-size: 13px; color: var(--gray); font-weight: 300; line-height: 1.6; }
+
+  .team-section { background: var(--off-white); }
+  .team-intro { text-align: center; max-width: 640px; margin: 0 auto 64px; }
+  .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .team-card {
+    background: white; border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+  }
+  .team-card-header { background: var(--purple); padding: 36px 36px 28px; color: white; }
+  .team-card-header h3 { font-family: var(--font-display); font-size: 30px; font-weight: 300; margin-bottom: 4px; }
+  .team-card-header .role { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); font-weight: 400; }
+  .team-card-body { padding: 32px 36px; }
+  .team-bio { font-size: 14px; color: var(--gray); line-height: 1.8; font-weight: 300; margin-bottom: 24px; }
+  .team-credentials { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .team-credentials li {
+    font-size: 13px; color: var(--gray-dark); font-weight: 300;
+    padding-left: 16px; position: relative; line-height: 1.5;
+  }
+  .team-credentials li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
+
+  /* ── FOCUS / SERVICES ────────────────────── */
+  .focus-intro-grid {
+    display: grid; grid-template-columns: 5fr 4fr; gap: 80px; align-items: start;
+  }
+  .services-list { display: flex; flex-direction: column; gap: 0; }
+  .service-item {
+    padding: 36px 0; border-bottom: 1px solid var(--border);
+    display: grid; grid-template-columns: 48px 1fr; gap: 24px; align-items: start;
+  }
+  .service-num {
+    font-family: var(--font-display); font-size: 13px; color: var(--gold);
+    font-weight: 400; letter-spacing: 1px; padding-top: 3px;
+  }
+  .service-content h3 {
+    font-family: var(--font-display); font-size: 22px; font-weight: 400;
+    color: var(--black); margin-bottom: 10px;
+  }
+  .service-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .tag {
+    font-size: 11px; padding: 4px 12px; border-radius: 20px;
+    background: var(--purple-faint); color: var(--purple);
+    font-weight: 400; letter-spacing: 0.3px;
+  }
+
+  .asset-classes-section { background: var(--purple-dark); padding: var(--section-pad) 0; }
+  .asset-classes-section .label { color: var(--gold); }
+  .asset-classes-section .headline-lg { color: white; margin-bottom: 16px; }
+  .asset-classes-section .body-text { color: rgba(255,255,255,0.6); margin-bottom: 48px; }
+  .asset-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .asset-tile {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px; padding: 24px 20px;
+    transition: background 0.2s;
+  }
+  .asset-tile:hover { background: rgba(255,255,255,0.1); }
+  .asset-tile-name { font-size: 14px; color: white; font-weight: 400; margin-bottom: 4px; }
+  .asset-tile-sub { font-size: 12px; color: rgba(255,255,255,0.45); font-weight: 300; }
+
+  .expertise-section { padding: var(--section-pad) 0; }
+  .expertise-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; }
+  .expertise-card {
+    border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+  }
+  .expertise-card-header {
+    padding: 28px 32px; display: flex; align-items: center; gap: 16px;
+  }
+  .expertise-card-header.housing { background: var(--purple); }
+  .expertise-card-header.retail { background: #1a1a2e; }
+  .expertise-icon {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .expertise-icon svg { width: 20px; height: 20px; stroke: white; fill: none; stroke-width: 1.5; }
+  .expertise-card-header h3 { font-family: var(--font-display); font-size: 22px; font-weight: 300; color: white; }
+  .expertise-card-body { padding: 28px 32px; background: white; }
+  .expertise-points { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .expertise-points li {
+    font-size: 13px; color: var(--gray-dark); font-weight: 300;
+    padding-left: 18px; position: relative; line-height: 1.6;
+  }
+  .expertise-points li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-size: 12px; top: 1px; }
+
+  /* ── CONTACT ─────────────────────────────── */
+  .contact-grid { display: grid; grid-template-columns: 5fr 4fr; gap: 80px; align-items: start; }
+  .contact-form-wrap { }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+  .form-group label { font-size: 12px; font-weight: 500; letter-spacing: 0.5px; color: var(--gray-dark); text-transform: uppercase; }
+  .form-group input, .form-group textarea, .form-group select {
+    border: 1px solid var(--border); border-radius: 3px;
+    padding: 14px 16px; font-family: var(--font-body); font-size: 15px;
+    color: var(--black); background: white; font-weight: 300;
+    transition: border-color 0.2s; outline: none; width: 100%;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    border-color: var(--purple);
+  }
+  .form-group textarea { resize: vertical; min-height: 140px; }
+  .form-submit { width: 100%; padding: 16px; background: var(--purple); color: white;
+    border: none; border-radius: 3px; font-family: var(--font-body); font-size: 15px;
+    font-weight: 500; cursor: pointer; letter-spacing: 0.3px; transition: background 0.2s;
+    margin-top: 8px;
+  }
+  .form-submit:hover { background: var(--purple-dark); }
+  .form-note { font-size: 12px; color: var(--gray-light); margin-top: 12px; text-align: center; font-weight: 300; }
+  .form-success {
+    display: none; background: #f0faf4; border: 1px solid #a8d5b5; border-radius: 6px;
+    padding: 24px 28px; text-align: center; margin-top: 20px;
+  }
+  .form-success h4 { color: #2d7a50; font-family: var(--font-display); font-size: 22px; font-weight: 400; margin-bottom: 8px; }
+  .form-success p { font-size: 14px; color: #4a9069; font-weight: 300; }
+
+  .contact-info-card {
+    background: var(--purple-dark); border-radius: 6px; padding: 40px;
+    color: white;
+  }
+  .contact-info-card h3 { font-family: var(--font-display); font-size: 26px; font-weight: 300; margin-bottom: 8px; }
+  .contact-info-card p { font-size: 14px; color: rgba(255,255,255,0.6); font-weight: 300; margin-bottom: 36px; line-height: 1.7; }
+  .contact-person { padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .contact-person:last-of-type { border-bottom: none; }
+  .contact-person-name { font-size: 17px; font-weight: 500; color: white; margin-bottom: 4px; }
+  .contact-person-role { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); font-weight: 400; margin-bottom: 10px; }
+  .contact-person-email { font-size: 13px; color: rgba(255,255,255,0.65); font-weight: 300; }
+  .contact-google-note {
+    margin-top: 28px; padding: 16px 20px;
+    background: rgba(255,255,255,0.06); border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.1);
+    font-size: 12px; color: rgba(255,255,255,0.5); font-weight: 300; line-height: 1.6;
+  }
+
+  /* ── FOOTER ──────────────────────────────── */
+  footer {
+    background: var(--black); color: white; padding: 60px 0 40px;
+  }
+  .footer-inner {
+    max-width: var(--max-w); margin: 0 auto; padding: 0 40px;
+    display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px;
+  }
+  .footer-brand { }
+  .footer-brand-logo {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+  }
+  .footer-brand-logo .mark {
+    width: 32px; height: 32px; background: var(--purple); border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .footer-brand-logo .mark span { color: white; font-family: var(--font-display); font-size: 13px; font-weight: 600; }
+  .footer-brand-logo strong { font-size: 14px; font-weight: 400; }
+  .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.4); font-weight: 300; line-height: 1.7; max-width: 280px; }
+  .footer-col h4 { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 400; margin-bottom: 20px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li { font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 300; cursor: pointer; transition: color 0.2s; }
+  .footer-col ul li:hover { color: white; }
+  .footer-bottom {
+    max-width: var(--max-w); margin: 40px auto 0; padding: 24px 40px 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.3); font-weight: 300; }
+
+  /* ── ANIMATIONS ──────────────────────────── */
+  .fade-up {
+    opacity: 0; transform: translateY(24px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+  /* ── RESPONSIVE ──────────────────────────── */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero::before { display: none; }
+    .about-intro-grid, .focus-intro-grid, .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    .team-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .asset-grid { grid-template-columns: repeat(2, 1fr); }
+    .expertise-grid { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; gap: 40px; }
+    .nav-links { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="showPage('home')">
+      <div class="nav-logo-mark"><span>AAO</span></div>
+      <div class="nav-logo-text">
+        <strong>AAO Property Group</strong>
+        <span>Strategic Real Estate Advisory</span>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+      <li><a onclick="showPage('about')" id="nav-about">About Us</a></li>
+      <li><a onclick="showPage('focus')" id="nav-focus">Our Focus</a></li>
+      <li><a onclick="showPage('contact')" id="nav-contact" class="nav-cta">Contact Us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════ HOME PAGE -->
+<div class="page active" id="page-home">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-left fade-up">
+        <span class="hero-tagline">Strategic Real Estate Advisory</span>
+        <h1 class="hero-headline">Solving the deals<br><em>others won't</em><br>touch.</h1>
+        <p class="hero-body">AAO Property Group provides investment banking–style advisory services across complex, distressed, and execution-challenged real estate situations — across every asset class, at every stage of the capital stack.</p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="showPage('focus')">Our Services</button>
+          <button class="btn-outline" onclick="showPage('about')">About the Firm</button>
+        </div>
+      </div>
+      <div class="hero-right fade-up" style="animation-delay:0.15s">
+        <div class="hero-stat-card accent">
+          <div class="stat-num">40+</div>
+          <div class="stat-label">Years of combined principal experience across institutional real estate, capital markets, and community development</div>
+        </div>
+        <div class="hero-stat-card accent-purple">
+          <div class="stat-num">$140M+</div>
+          <div class="stat-label">In transactions executed, including one of the highest sales volumes in organizational history at CAPC/NJCC</div>
+        </div>
+        <div class="hero-stat-card accent">
+          <div class="stat-num">1,000</div>
+          <div class="stat-label">CRE Counselors of Real Estate worldwide — Ryan Johnson is among them, one of the most selective designations in the industry</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ticker -->
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span class="ticker-item"><span class="ticker-dot"></span>Distressed & Special Situations</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Capital Structuring</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Municipal & Public Sector Advisory</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Transaction Advisory</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Strategic Asset Management</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Development & Adaptive Reuse</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Distressed & Special Situations</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Capital Structuring</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Municipal & Public Sector Advisory</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Transaction Advisory</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Strategic Asset Management</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Development & Adaptive Reuse</span>
+    </div>
+  </div>
+
+  <!-- What We Do -->
+  <section class="section">
+    <div class="container">
+      <span class="label">What We Do</span>
+      <h2 class="headline headline-lg" style="margin-bottom:16px;">Advisory across the full<br>real estate lifecycle.</h2>
+      <p class="body-text" style="max-width:580px; margin-bottom:56px;">We specialize in solving challenges that others cannot — leveraging creativity, rigorous financial discipline, and a nationwide network of relationships. Quality over quantity: senior-level focus on every engagement.</p>
+      <div class="services-grid">
+        <div class="service-cell">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="service-title">Distressed & Special Situations</div>
+          <p class="body-text-sm">Workouts, restructurings, loan sales, ground lease disputes, and distressed acquisitions and dispositions.</p>
+        </div>
+        <div class="service-cell">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <div class="service-title">Capital Structuring</div>
+          <p class="body-text-sm">Equity placement, bridge and permanent financing, recapitalizations, and tax credit integration including LIHTC and NMTC.</p>
+        </div>
+        <div class="service-cell">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
+          </div>
+          <div class="service-title">Municipal & Public Sector</div>
+          <p class="body-text-sm">Triage of stalled development projects, P3 structuring support, and independent advisory to mayors, councils, and public boards.</p>
+        </div>
+        <div class="service-cell">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div class="service-title">Transaction Advisory</div>
+          <p class="body-text-sm">Buy-side and sell-side representation, JV participation, complex negotiations, due diligence, and asset repositioning.</p>
+        </div>
+        <div class="service-cell">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="service-title">Strategic Asset Management</div>
+          <p class="body-text-sm">Turnaround strategies, value-add repositioning, operational efficiency, and lender/borrower alignment through workout situations.</p>
+        </div>
+        <div class="service-cell">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+          </div>
+          <div class="service-title">Development & Adaptive Reuse</div>
+          <p class="body-text-sm">Complex ground-up developments, historic asset repositioning, adaptive reuse, and public-private partnership guidance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-sm" style="background:var(--purple-dark); padding: 80px 0;">
+    <div class="container" style="text-align:center;">
+      <span class="label" style="justify-content:center; display:block;">Work With Us</span>
+      <h2 class="headline headline-lg" style="color:white; margin-bottom:20px; max-width:560px; margin-left:auto; margin-right:auto;">Bring us your<br>hardest situations.</h2>
+      <p style="color:rgba(255,255,255,0.6); font-size:16px; font-weight:300; max-width:480px; margin:0 auto 40px; line-height:1.8;">If the situation is complex, distressed, or stalled — at any stage, in any asset class — we want to hear about it.</p>
+      <button class="btn-primary" onclick="showPage('contact')" style="background:var(--gold); color: #1a0a2e; font-weight:600;">Start a Conversation</button>
+    </div>
+  </section>
+
+</div><!-- /home -->
+
+<!-- ═══════════════════════════════════════════ ABOUT PAGE -->
+<div class="page" id="page-about">
+
+  <div class="page-hero">
+    <div class="container">
+      <span class="page-hero-label">About AAO Property Group</span>
+      <h1 class="page-hero-headline">Investment banking discipline.<br>Real estate expertise.</h1>
+      <p class="page-hero-sub">A boutique strategic real estate advisory firm built on the principle that quality engagement produces better outcomes than volume.</p>
+    </div>
+  </div>
+
+  <!-- Firm intro -->
+  <section class="section">
+    <div class="container">
+      <div class="about-intro-grid">
+        <div class="about-intro-left">
+          <span class="label">The Firm</span>
+          <h2 class="headline headline-lg">Boutique by design.<br>Institutional in execution.</h2>
+          <div class="gold-rule"></div>
+          <p class="body-text">AAO Property Group is a boutique strategic real estate advisory firm providing investment banking–style advisory services across complex, distressed, and execution-challenged situations spanning single family, multifamily, office, retail, hospitality, mixed-use, land, and public-private real estate.</p>
+          <p class="body-text" style="margin-top:16px;">With over 40 years of combined market experience, our principals bring deep expertise across investment, development, asset management, and capital structuring. We work with owners, lenders, investors, operating partners, institutions, municipalities, and advisory firms across the real estate ecosystem.</p>
+          <p class="body-text" style="margin-top:16px;">Our philosophy is <em style="font-style:italic; color:var(--purple);">"quality over quantity"</em> — we take on a select number of engagements to ensure senior-level focus, innovative thinking, and outstanding execution for each client.</p>
+        </div>
+        <div class="about-intro-right">
+          <div class="about-pillars">
+            <div class="pillar-row">
+              <strong>Senior Principal Involvement</strong>
+              <p>Our principals lead every engagement personally. No hand-offs to junior staff. No black-box advice. Clients receive direct access to 40+ years of combined experience on every mandate.</p>
+            </div>
+            <div class="pillar-row">
+              <strong>Investment Banking Rigor</strong>
+              <p>We apply institutional analytical discipline — rigorous underwriting, clear-eyed assessment, and structured advisory processes that produce defensible, actionable recommendations.</p>
+            </div>
+            <div class="pillar-row">
+              <strong>Cross-Asset Perspective</strong>
+              <p>Experience across every major property type means we bring flexible solutions — not a single-asset playbook applied to every situation regardless of fit.</p>
+            </div>
+            <div class="pillar-row">
+              <strong>Advisory or Principal</strong>
+              <p>Engagements may be advisory-only or principal-based depending on client objectives and transaction structure. We can advise, execute, or co-invest.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Team -->
+  <section class="section team-section">
+    <div class="container">
+      <div class="team-intro">
+        <span class="label">Our Principals</span>
+        <h2 class="headline headline-lg">The team behind every engagement.</h2>
+        <div class="gold-rule" style="margin:24px auto;"></div>
+        <p class="body-text">Over 40 years of combined experience across investment banking, institutional real estate, credit, and community development. Every client works directly with our principals.</p>
+      </div>
+      <div class="team-grid">
+
+        <!-- Ryan -->
+        <div class="team-card">
+          <div class="team-card-header">
+            <h3>Ryan Johnson</h3>
+            <div class="role">Partner & Strategy Lead</div>
+          </div>
+          <div class="team-card-body">
+            <p class="team-bio">Ryan Johnson has 20 years of experience across real estate, community development, and entrepreneurship. He brings institutional investment discipline to complex, distressed, and mission-oriented real estate situations — with a track record that spans affordable housing turnarounds, institutional retail portfolio management, and structured capital transactions.</p>
+            <ul class="team-credentials">
+              <li>Managing Director, Trust Neighborhoods — lead on the MINT (Mixed-Income Neighborhood Trust) model</li>
+              <li>Head of CAPC (NJCC Real Estate Subsidiary) — $140M+ in transactions; 830 units acquired; 75% economic occupancy achieved</li>
+              <li>Portfolio Manager, Madison International Realty — $1B retail portfolio across US, UK, and Western Europe</li>
+              <li>Prior experience: Brixmor, MetLife, CIT — institutional real estate on both equity and debt sides</li>
+              <li>Counselor of Real Estate (CRE) — one of only 1,000 globally</li>
+              <li>ULI Redevelopment & Reuse Product Council member</li>
+              <li>Advisory work with Cushman & Wakefield, The Brookings Institute, and LISC</li>
+              <li>BS Finance, University of Virginia McIntire School of Commerce</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Garfield -->
+        <div class="team-card">
+          <div class="team-card-header" style="background:var(--purple-dark);">
+            <h3>Garfield Johnson</h3>
+            <div class="role">Partner & Capital Markets Lead</div>
+          </div>
+          <div class="team-card-body">
+            <p class="team-bio">Garfield Johnson has more than 35 years of experience in credit, risk, finance, and banking. He brings institutional capital markets depth to every AAO engagement — with a career spanning regulatory oversight, global risk management, structured finance, and business development at some of the world's most prominent financial institutions.</p>
+            <ul class="team-credentials">
+              <li>Federal Reserve Bank of New York — Commercial Bank Examiner</li>
+              <li>JP Morgan Chase — Risk management and counterparty risk (US and international operations)</li>
+              <li>Bank of America — Global risk responsibility for bilateral and syndicated loans (hundreds of billions)</li>
+              <li>MBIA Inc. — Built new line of business around corporate credits generating billions in insurance in force</li>
+              <li>Newark Board of Education Employees Credit Union — Stabilized and rebuilt lending operations over 10 years</li>
+              <li>MBA Finance with real estate and investment management focus, Fordham Gabelli Graduate Business School</li>
+              <li>BS Business Administration, Seton Hall University</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div><!-- /about -->
+
+<!-- ═══════════════════════════════════════════ FOCUS PAGE -->
+<div class="page" id="page-focus">
+
+  <div class="page-hero">
+    <div class="container">
+      <span class="page-hero-label">Our Focus</span>
+      <h1 class="page-hero-headline">Complex situations.<br>Every asset class.</h1>
+      <p class="page-hero-sub">AAO is asset-class agnostic by design — with concentrated expertise in distressed and special situations wherever they arise in the real estate ecosystem.</p>
+    </div>
+  </div>
+
+  <!-- Services list -->
+  <section class="section">
+    <div class="container">
+      <div class="focus-intro-grid">
+        <div>
+          <span class="label">Advisory Services</span>
+          <h2 class="headline headline-lg" style="margin-bottom:40px;">Six service lines.<br>One point of contact.</h2>
+          <div class="services-list">
+            <div class="service-item">
+              <div class="service-num">01</div>
+              <div class="service-content">
+                <h3>Distressed & Special Situations</h3>
+                <p class="body-text-sm">Workouts and loan restructurings, distressed acquisitions and dispositions, ground lease disputes and terminations, loan sales and note purchases, and receivership and asset stabilization. We operate where conventional advisors do not go.</p>
+                <div class="service-tags">
+                  <span class="tag">Workouts</span><span class="tag">Loan Sales</span><span class="tag">Ground Leases</span><span class="tag">Receivership</span><span class="tag">Note Purchases</span>
+                </div>
+              </div>
+            </div>
+            <div class="service-item">
+              <div class="service-num">02</div>
+              <div class="service-content">
+                <h3>Capital Structuring</h3>
+                <p class="body-text-sm">Equity placement and JV structuring, bridge, construction, and permanent financing, recapitalizations and partner buyouts, and tax credit integration including LIHTC, NMTC, and Historic Tax Credits. Subsidy and agency financing through HUD, Freddie Mac, and Fannie Mae.</p>
+                <div class="service-tags">
+                  <span class="tag">LIHTC</span><span class="tag">NMTC</span><span class="tag">JV Structuring</span><span class="tag">Agency Financing</span><span class="tag">Recapitalization</span>
+                </div>
+              </div>
+            </div>
+            <div class="service-item">
+              <div class="service-num">03</div>
+              <div class="service-content">
+                <h3>Municipal & Public Sector Advisory</h3>
+                <p class="body-text-sm">Triage of stalled development projects, P3 structuring and developer evaluation, disposition strategy for public assets, and independent advisory to mayors, councils, and public boards. Affordable housing policy and financing strategy.</p>
+                <div class="service-tags">
+                  <span class="tag">P3</span><span class="tag">Public Assets</span><span class="tag">Affordable Housing Policy</span><span class="tag">Government Advisory</span>
+                </div>
+              </div>
+            </div>
+            <div class="service-item">
+              <div class="service-num">04</div>
+              <div class="service-content">
+                <h3>Transaction Advisory</h3>
+                <p class="body-text-sm">Buy-side and sell-side representation, joint venture structuring and negotiation, complex due diligence and asset positioning, distressed portfolio strategy, and coordination with intermediaries and broker-dealers.</p>
+                <div class="service-tags">
+                  <span class="tag">Buy-Side</span><span class="tag">Sell-Side</span><span class="tag">Due Diligence</span><span class="tag">JV Negotiation</span>
+                </div>
+              </div>
+            </div>
+            <div class="service-item">
+              <div class="service-num">05</div>
+              <div class="service-content">
+                <h3>Strategic Asset Management</h3>
+                <p class="body-text-sm">Turnaround and stabilization strategies, value-add repositioning and execution, operational efficiency and collections normalization, lender/borrower alignment and workout support, and third-party management oversight.</p>
+                <div class="service-tags">
+                  <span class="tag">Turnaround</span><span class="tag">Stabilization</span><span class="tag">Collections</span><span class="tag">Workout Support</span>
+                </div>
+              </div>
+            </div>
+            <div class="service-item">
+              <div class="service-num">06</div>
+              <div class="service-content">
+                <h3>Development & Adaptive Reuse</h3>
+                <p class="body-text-sm">Complex ground-up and redevelopment guidance, historic asset repositioning, adaptive reuse structuring and execution, construction crisis and contractor disputes, and funding gap resolution.</p>
+                <div class="service-tags">
+                  <span class="tag">Ground-Up</span><span class="tag">Historic</span><span class="tag">Adaptive Reuse</span><span class="tag">Construction Crisis</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right sidebar -->
+        <div>
+          <div style="position:sticky; top:calc(var(--nav-h) + 32px);">
+            <div style="background:var(--purple-faint); border-radius:6px; padding:32px; margin-bottom:24px;">
+              <span class="label" style="display:block; margin-bottom:12px;">Our Approach</span>
+              <h3 style="font-family:var(--font-display); font-size:22px; font-weight:400; color:var(--black); margin-bottom:16px;">Engagements begin with a rapid situation assessment.</h3>
+              <p class="body-text-sm" style="margin-bottom:16px;">Every engagement begins with a clear-eyed assessment of the asset, capital stack, and stakeholder positions. We identify the core problem and the realistic path to resolution — quickly and honestly.</p>
+              <p class="body-text-sm">No vague retainers. No open-ended engagements. We define scope, timeline, fee structure, and outcomes before we begin.</p>
+            </div>
+            <div style="background:var(--purple-dark); border-radius:6px; padding:32px;">
+              <span style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); font-weight:500; display:block; margin-bottom:16px;">Advisory or Principal</span>
+              <p style="font-size:14px; color:rgba(255,255,255,0.75); font-weight:300; line-height:1.8;">Engagements may be structured as advisory-only or principal-based — including as a co-GP, operating partner, or executive hire — depending on client objectives and transaction structure.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Asset Classes -->
+  <section class="asset-classes-section">
+    <div class="container">
+      <span class="label">Asset Class Coverage</span>
+      <h2 class="headline headline-lg">Asset-agnostic by design.</h2>
+      <p class="body-text">We work across all real estate asset types wherever complexity, distress, or execution challenges require experienced leadership.</p>
+      <div class="asset-grid">
+        <div class="asset-tile"><div class="asset-tile-name">Multifamily</div><div class="asset-tile-sub">Regulated, affordable, market-rate</div></div>
+        <div class="asset-tile"><div class="asset-tile-name">Single Family</div><div class="asset-tile-sub">Portfolios, distressed, REO</div></div>
+        <div class="asset-tile"><div class="asset-tile-name">Office</div><div class="asset-tile-sub">Conversion, distress, repositioning</div></div>
+        <div class="asset-tile"><div class="asset-tile-name">Retail</div><div class="asset-tile-sub">Institutional & distressed, ground floor</div></div>
+        <div class="asset-tile"><div class="asset-tile-name">Hospitality</div><div class="asset-tile-sub">Workouts, repositioning</div></div>
+        <div class="asset-tile"><div class="asset-tile-name">Mixed-Use</div><div class="asset-tile-sub">Complex entitlements, urban development</div></div>
+        <div class="asset-tile"><div class="asset-tile-name">Land</div><div class="asset-tile-sub">Entitlement, disposition, repositioning</div></div>
+        <div class="asset-tile"><div class="asset-tile-name">Public-Private</div><div class="asset-tile-sub">P3, civic, redevelopment</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deep expertise -->
+  <section class="expertise-section">
+    <div class="container">
+      <span class="label">Deep Verticals</span>
+      <h2 class="headline headline-lg">Areas of concentrated expertise.</h2>
+      <p class="body-text" style="max-width:600px; margin-top:12px;">Within our asset-agnostic advisory practice, two verticals represent the deepest concentration of hands-on transaction and operational experience.</p>
+      <div class="expertise-grid">
+        <div class="expertise-card">
+          <div class="expertise-card-header housing">
+            <div class="expertise-icon">
+              <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
+            </div>
+            <h3>Regulated & Affordable Housing</h3>
+          </div>
+          <div class="expertise-card-body">
+            <ul class="expertise-points">
+              <li>LIHTC compliance, HAP contracts, resyndication, and layered capital stack management</li>
+              <li>Tenant law, TOPA rights, structured buyout programs, and housing agency relationships across DC and NYC</li>
+              <li>$140M+ in affordable housing transactions at CAPC/NJCC including full portfolio stabilization</li>
+              <li>Freddie Mac, Fannie Mae, FHA 223(f), tax-exempt bonds, and soft subordinate debt structuring</li>
+              <li>Deep relationships with syndicators, CDFIs, housing agencies, HPN, and NeighborWorks</li>
+              <li>Political and regulatory navigation across the most complex regulated housing markets in the US</li>
+            </ul>
+          </div>
+        </div>
+        <div class="expertise-card">
+          <div class="expertise-card-header retail">
+            <div class="expertise-icon">
+              <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            </div>
+            <h3>Distressed & Institutional Retail</h3>
+          </div>
+          <div class="expertise-card-body">
+            <ul class="expertise-points">
+              <li>Managed a 2.5M sf, $1B+ institutional retail portfolio for Madison International Realty across US, UK, and Western Europe</li>
+              <li>Distressed retail workouts including delinquent tenant resolutions, cash-for-keys structures, and ground lease disputes</li>
+              <li>Ground lease termination and arbitration, including the $24M sale of 656–660 Lexington Avenue</li>
+              <li>Institutional capital markets background from Brixmor, MetLife, and CIT — equity and debt sides</li>
+              <li>Experience navigating COVID moratorium environments, anchor vacancy situations, and complex tenancy</li>
+              <li>Urban ground-floor and mixed-use retail in community development and public-private partnership contexts</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /focus -->
+
+<!-- ═══════════════════════════════════════════ CONTACT PAGE -->
+<div class="page" id="page-contact">
+
+  <div class="page-hero">
+    <div class="container">
+      <span class="page-hero-label">Contact Us</span>
+      <h1 class="page-hero-headline">Let's talk about<br>your situation.</h1>
+      <p class="page-hero-sub">We review every inquiry personally. If the situation is complex, distressed, or stalled — we want to hear about it.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Form -->
+        <div class="contact-form-wrap">
+          <span class="label">Send Us a Message</span>
+          <h2 class="headline headline-md" style="margin-bottom:32px;">Tell us about your situation.</h2>
+
+          <form id="contactForm" onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>First Name *</label>
+                <input type="text" placeholder="First name" required>
+              </div>
+              <div class="form-group">
+                <label>Last Name *</label>
+                <input type="text" placeholder="Last name" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email Address *</label>
+              <input type="email" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+              <label>Company / Organization</label>
+              <input type="text" placeholder="Your firm or organization">
+            </div>
+            <div class="form-group">
+              <label>Nature of Inquiry</label>
+              <select>
+                <option value="">Select a category</option>
+                <option>Distressed Asset / Workout</option>
+                <option>Capital Structuring</option>
+                <option>Transaction Advisory</option>
+                <option>Asset Management / Turnaround</option>
+                <option>Municipal / Public Sector Advisory</option>
+                <option>Development / Adaptive Reuse</option>
+                <option>Principal Partnership / Investment</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Asset Type</label>
+              <select>
+                <option value="">Select asset type</option>
+                <option>Multifamily</option>
+                <option>Affordable / Regulated Housing</option>
+                <option>Retail</option>
+                <option>Office</option>
+                <option>Hospitality</option>
+                <option>Mixed-Use</option>
+                <option>Land</option>
+                <option>Public / Civic</option>
+                <option>Other / Multiple</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Tell Us More *</label>
+              <textarea placeholder="Briefly describe the situation, asset, or opportunity. We review every message personally." required></textarea>
+            </div>
+            <button type="submit" class="form-submit">Send Message →</button>
+            <p class="form-note">Your information is held in strict confidence and will not be shared with third parties.</p>
+          </form>
+
+          <div class="form-success" id="formSuccess">
+            <h4>Message Received</h4>
+            <p>Thank you for reaching out. One of our principals will review your inquiry and be in touch shortly.</p>
+          </div>
+        </div>
+
+        <!-- Contact info -->
+        <div>
+          <div class="contact-info-card">
+            <h3>Our Principals</h3>
+            <p>Every inquiry is reviewed directly by Ryan or Garfield Johnson. We respond to every message — typically within one business day.</p>
+
+            <div class="contact-person">
+              <div class="contact-person-name">Ryan Johnson</div>
+              <div class="contact-person-role">Partner & Strategy Lead</div>
+              <div class="contact-person-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dba9b1b4b3b5a8b4b59bbabab4aba9b4abbea9afa2bca9b4aeabf5b8b4b6">[email&#160;protected]</a></div>
+            </div>
+            <div class="contact-person">
+              <div class="contact-person-name">Garfield Johnson</div>
+              <div class="contact-person-role">Partner & Capital Markets Lead</div>
+              <div class="contact-person-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="086f626760667b676648696967787a67786d7a7c716f7a677d78266b6765">[email&#160;protected]</a></div>
+            </div>
+
+            <div class="contact-google-note">
+              AAO Property Group operates on Google Workspace. All communications are secure and handled with full confidentiality. The firm was previously reachable at aaopropertygroup.com — we are actively rebuilding our web presence.
+            </div>
+          </div>
+
+          <div style="margin-top:24px; padding:28px 32px; border:1px solid var(--border); border-radius:6px;">
+            <span class="label" style="display:block; margin-bottom:12px;">What to Expect</span>
+            <div style="display:flex; flex-direction:column; gap:16px;">
+              <div style="display:flex; gap:16px; align-items:flex-start;">
+                <div style="width:28px; height:28px; background:var(--purple-faint); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:11px; font-weight:500; color:var(--purple);">1</div>
+                <div><strong style="font-size:13px; display:block; margin-bottom:4px;">Situation Review</strong><p class="body-text-sm" style="font-size:12px;">We review your inquiry and assess the situation against our expertise and current capacity.</p></div>
+              </div>
+              <div style="display:flex; gap:16px; align-items:flex-start;">
+                <div style="width:28px; height:28px; background:var(--purple-faint); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:11px; font-weight:500; color:var(--purple);">2</div>
+                <div><strong style="font-size:13px; display:block; margin-bottom:4px;">Initial Call</strong><p class="body-text-sm" style="font-size:12px;">A brief call to understand the situation, key stakeholders, and timeline before we discuss any advisory structure.</p></div>
+              </div>
+              <div style="display:flex; gap:16px; align-items:flex-start;">
+                <div style="width:28px; height:28px; background:var(--purple-faint); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:11px; font-weight:500; color:var(--purple);">3</div>
+                <div><strong style="font-size:13px; display:block; margin-bottom:4px;">Clear Proposal</strong><p class="body-text-sm" style="font-size:12px;">If there is a fit, we provide a defined scope, timeline, and fee structure — no vague retainers.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div><!-- /contact -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-brand-logo">
+        <div class="mark"><span>AAO</span></div>
+        <strong>AAO Property Group</strong>
+      </div>
+      <p class="footer-tagline">Boutique strategic real estate advisory — solving complex, distressed, and execution-challenged situations across every asset class.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li onclick="showPage('home')">Home</li>
+        <li onclick="showPage('about')">About Us</li>
+        <li onclick="showPage('focus')">Our Focus</li>
+        <li onclick="showPage('contact')">Contact</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li>Distressed & Special Situations</li>
+        <li>Capital Structuring</li>
+        <li>Transaction Advisory</li>
+        <li>Strategic Asset Management</li>
+        <li>Municipal Advisory</li>
+        <li>Development & Reuse</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 AAO Property Group. All rights reserved.</p>
+    <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="14667e7b7c7a677b7a5475757b64667b647166606d73667b61643a777b79">[email&#160;protected]</a> · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d4b3bebbbcbaa7bbba94b5b5bba4a6bba4b1a6a0adb3a6bba1a4fab7bbb9">[email&#160;protected]</a></p>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.rem
